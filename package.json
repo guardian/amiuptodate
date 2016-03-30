@@ -1,0 +1,26 @@
+{
+  "name": "amiuptodate",
+  "version": "0.0.1",
+  "description": "Angular module to check if the current app is up to date.",
+  "keywords": [
+    "angular"
+  ],
+  "homepage": "https://github.com/guardian/amiuptodate",
+  "main": "src/checker.js",
+  "author": "Robert Kenny <robert.kenny@guardian.co.uk>",
+  "license": "Apache-2",
+  "jspm": {
+    "registry": "jspm",
+    "format": "es6",
+    "dependencies": {
+      "angular": "github:angular/bower-angular@^1.2.16",
+      "rx": "npm:rx@^4.1.0",
+      "theseus": "npm:theseus@^0.5.2",
+      "theseus-angular": "npm:theseus-angular@^0.3.1"
+    },
+    "devDependencies": {
+      "traceur": "github:jmcriffey/bower-traceur@0.0.93",
+      "traceur-runtime": "github:jmcriffey/bower-traceur-runtime@0.0.93"
+    }
+  }
+}
