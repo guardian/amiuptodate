@@ -54,10 +54,14 @@ checker.config(['$provide', function ($provide) {
         return isUpdated;
     };
 
-    function setRevisionFromApi$() {
-        getResponse$().map((response) => rev.set(response.Revision))
-    }
+    const setRevisionFromApi$ = getResponse$()
+      .map((response) => rev.set(response.Revision))
 
-    return { buildInfo$, updated$, setRevisionFromApi$ };
+    const refresh$ = updated$
+      .filter((updated) => updated)
+      .flatMap((_) => setRevisionFromApi$)
+      .map((_) => $window.location.reload());  
+
+    return { buildInfo$, updated$, setRevisionFromApi$, refresh$ };
   }]);
 }]);

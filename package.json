@@ -1,6 +1,6 @@
 {
   "name": "amiuptodate",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Angular module to check if the current app is up to date.",
   "keywords": [
     "angular"
