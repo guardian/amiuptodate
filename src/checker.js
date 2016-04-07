@@ -14,6 +14,7 @@ checker.config(['$provide', function ($provide) {
 
           function($window, appNamespace, buildInfoUrl, pollInterval, client) {
 
+    const retryAttempts = 5;
     const pollMillis = pollInterval * 1000;
     const poller$    = Rx.Observable.interval(pollMillis).timeInterval()
 
@@ -36,9 +37,12 @@ checker.config(['$provide', function ($provide) {
         return Rx.Observable.fromPromise(clientPromise);
     };
 
-    const buildInfo$ = poller$.flatMap((n) => {
-        return getResponse$().map((response) => response.data);
-    });
+    const buildInfo$ = poller$
+        .flatMap((n) => getResponse$().map((response) => response.data))
+        .retryWhen((attempts) => Rx.Observable
+            .range(1, retryAttempts)
+            .zip(attempts, (i) =>  i)
+            .flatMap((i) => Rx.Observable.timer(i * i * 1000)));
 
     const updated$ = buildInfo$
         .map((data) => checkUpdated(data.Revision))
