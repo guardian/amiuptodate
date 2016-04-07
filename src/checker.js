@@ -23,7 +23,7 @@ checker.config(['$provide', function ($provide) {
 
         return {
             get: () => localStorage.getItem(storeKey),
-            set: () => localStorage.setItem(storeKey, rev)
+            set: (rev) => localStorage.setItem(storeKey, rev)
         }
     }
 
@@ -55,7 +55,7 @@ checker.config(['$provide', function ($provide) {
     };
 
     const setRevisionFromApi$ = getResponse$()
-      .map((response) => rev.set(response.Revision))
+      .map((response) => rev.set(response.data.Revision))
 
     const refresh$ = updated$
       .filter((updated) => updated)
